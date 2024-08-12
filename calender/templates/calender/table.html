@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load custom_filters %}
 <!--{% load static %}-->
 
 {% block page_content %}
@@ -53,34 +54,23 @@
             <tr>
                 <td>{{ hour }}</td>
                 {% for day in days %}
-
-                <td>
-                    {% for subject in subjects %}
-                        {% if subject.day1 == day and subject.time1.hour == hour.hour %} 
-                            {{subject.name}}
-                        {% elif subject.day2 == day and subject.time2.hour == hour.hour %}
-
-                            {{subject.name}}
-
+                    {% with emptycell = "yes" %}
+                        {% for subject in subjects %}
+                            {% if subject.day1 == day and subject.time1.hour == hour.hour or subject.day2 == day and subject.time2.hour == hour.hour %} 
+                                <td>{{subject.name}}</td>
+                                {{emptycell|change_to_no}}
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% for freetime in freetimes %}
+                            {% if freetime.day1 == day and freetime.time1.hour == hour.hour or freetime.day2 == day and freetime.time2.hour == hour.hour or freetime.day3 == day and freetime.time3.hour == hour.hour or freetime.day4 == day and freetime.time4.hour == hour.hour%}
+                                <td>{{freetime.name}}</td>
+                                {{emptycell|change_to_no}}
+                            {% endif %}
+                        {% endfor %}
+                        {% if emptycell == "yes" %} 
+                            <td></td>
                         {% endif %}
-                    {% endfor %}
-                    
-                    {% for freetime in freetimes %}
-                        {% if freetime.day1 == day and freetime.time1.hour == hour.hour %}
-                        {{freetime.name}}
-                        {% elif  freetime.day2 == day and freetime.time2.hour == hour.hour %}
-                        {{freetime.name}}
-                        {% elif  freetime.day3 == day and freetime.time3.hour == hour.hour %}
-                        {{freetime.name}}
-                        {% elif  freetime.day4 == day and freetime.time4.hour == hour.hour %}
-                            
-                            {{freetime.name}}
-
-                        {% endif %}
-                    {% endfor %}
-
-                </td>
-    
                 {% endfor %}
             </tr>
             {% endfor %}
