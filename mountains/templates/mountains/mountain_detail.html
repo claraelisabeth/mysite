@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<h1>{{ mountain.name }}</h1>
+<div class="row">
+    <div class="col-md-8">
+        {% if mountain.first_image %}
+            <img src="{{ mountain.detail_image.url }}" width="100%">
+        {% endif %}
+    </div>
+    <div class="col-md-4">
+        <h5>Height:</h5>
+        <p>{{ mountain.height }} meters</p>
+        <br>
+        <h5>Country:</h5>
+        <p>{{ mountain.country }}</p>
+        <br>
+        <h5>Difficulty of the hike:</h5>
+        <p>{{ mountain.difficulty }} / 10</p>
+        <br>
+        <h5>Comment:</h5>
+        <p>{{ mountain.comment }}</p>
+    </div>
+</div>
+{% endblock page_content %}

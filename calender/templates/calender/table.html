@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+<!--{% load static %}-->
+
+{% block page_content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Schedule</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #94c3d1;
+        }
+        td:hover {background-color: #D6EEEE;}
+        td:nth-child(1) {  
+            background-color: #bee3ee;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <h1>Weekly Schedule</h1>
+    <table>
+        <thead>
+            <tr>
+                <!--columns-->
+                <th>Time</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Creating a row for every hour between 7am and 9pm-->
+            <!--Checking for every pair (hour, weekday) if (time1, day1) or (time2, day2) fits for every subject and every freetime activity-->
+            {% for hour in hours %} 
+            <tr>
+                <td>{{ hour }}</td>
+                {% for day in days %}
+
+                <td>
+                    {% for subject in subjects %}
+                        {% if subject.day1 == day and subject.time1.hour == hour.hour %} 
+                            {{subject.name}}
+                        {% elif subject.day2 == day and subject.time2.hour == hour.hour %}
+
+                            {{subject.name}}
+
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% for freetime in freetimes %}
+                        {% if freetime.day1 == day and freetime.time1.hour == hour.hour %}
+                        {{freetime.name}}
+                        {% elif  freetime.day2 == day and freetime.time2.hour == hour.hour %}
+                        {{freetime.name}}
+                        {% elif  freetime.day3 == day and freetime.time3.hour == hour.hour %}
+                        {{freetime.name}}
+                        {% elif  freetime.day4 == day and freetime.time4.hour == hour.hour %}
+                            
+                            {{freetime.name}}
+
+                        {% endif %}
+                    {% endfor %}
+
+                </td>
+    
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<h1>Mountains</h1>
+<div class="row">
+{% for mountain in mountains %}
+    <div class="col-md-4">
+        <div class="card mb-2">
+            {% if mountain.first_image %}
+                <img class="card-img-top" src="{{ mountain.first_image.url }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ mountain.name }}</h5>
+                <p class="card-text">{{ mountain.comment }}</p>
+                <a href="{% url 'mountain_detail' mountain.pk %}" 
+                   class="btn btn-primary">
+                    Read More
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
