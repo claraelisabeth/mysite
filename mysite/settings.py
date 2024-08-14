@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "myapp.apps.MyappConfig",
     "mountains.apps.MountainsConfig",
+    "masterplan.apps.MasterplanConfig",
     "calender.apps.CalenderConfig",
     'django.contrib.admin',
     'django.contrib.auth',

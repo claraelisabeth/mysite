@@ -8,4 +8,4 @@ register = template.Library()
 @stringfilter
 def change_to_no(value): 
     value = "no"
-    return value
+    

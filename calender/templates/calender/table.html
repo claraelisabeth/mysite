@@ -54,7 +54,7 @@
             <tr>
                 <td>{{ hour }}</td>
                 {% for day in days %}
-                    {% with emptycell = "yes" %}
+                    {% with emptycell="yes" %}
                         {% for subject in subjects %}
                             {% if subject.day1 == day and subject.time1.hour == hour.hour or subject.day2 == day and subject.time2.hour == hour.hour %} 
                                 <td>{{subject.name}}</td>
@@ -71,6 +71,7 @@
                         {% if emptycell == "yes" %} 
                             <td></td>
                         {% endif %}
+                    {%endwith%}
                 {% endfor %}
             </tr>
             {% endfor %}
